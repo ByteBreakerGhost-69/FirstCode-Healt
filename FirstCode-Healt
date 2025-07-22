@@ -1,0 +1,31 @@
+import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib.animation as animation
+
+t = np.linspace(0, 2 * np.pi, 1000)
+x = 16 * np.sin(t) ** 3
+y = 13 * np.cos(t) - 5 * np.cos(2 * t) - 2 * np.cos(3 * t) - np.cos(4 * t)
+
+fig, ax = plt.subplots(figsize=(7,7))
+ax.set_title('Gambar Love')
+ax.axis('equal')
+ax.axis('off')
+
+# Gambar love statis sebagai background
+ax.plot(x, y, color='pink', linewidth=8, alpha=0.3)
+
+# Animasi garis love
+line, = ax.plot([], [], color='red', linewidth=2)
+
+# Tambahkan tulisan di tengah gambar
+ax.text(0, 0, 
+        "assalamualaikum my future wife\n and\n the mother of my children",
+        color='purple', fontsize=14, ha='center', va='center', fontweight='bold')
+
+def animate(i):
+    line.set_data(x[:i], y[:i])
+    return line,
+
+ani = animation.FuncAnimation(fig, animate, frames=len(t), interval=3, blit=True, repeat=False)
+
+plt.show()
